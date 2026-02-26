@@ -64,7 +64,7 @@ const BloodCamps = () => {
 
   const token = localStorage.getItem("token");
   // Fixed API URL - removed /blood-lab if it doesn't exist
-  const API_URL = "http://localhost:5000/api/blood-lab";
+  const API_URL = `${import.meta.env.VITE_API_URL}/api/blood-lab`;
 
   console.log("🔧 BloodCamps Component State:", {
     campsCount: camps.length,

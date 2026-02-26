@@ -20,7 +20,7 @@ import {
 import MapComponent from '../../components/MapComponent';
 import { getGlobalMapMarkers } from '../../utils/mapData';
 
-const API_URL = "http://localhost:5000/api/admin";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/admin`;
 
 function GetAllFacilities() {
   const [facilities, setFacilities] = useState([]);

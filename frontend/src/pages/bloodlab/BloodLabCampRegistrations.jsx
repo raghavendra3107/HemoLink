@@ -30,7 +30,7 @@ const BloodLabCampRegistrations = () => {
   const fetchRegistrations = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get(`http://localhost:5000/api/blood-lab/camps/${campId}/registrations`, {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/blood-lab/camps/${campId}/registrations`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.data.success) {
@@ -57,7 +57,7 @@ const BloodLabCampRegistrations = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://localhost:5000/api/blood-lab/camps/registrations/${registrationId}/status`,
+        `${import.meta.env.VITE_API_URL}/api/blood-lab/camps/registrations/${registrationId}/status`,
          { status: newStatus, quantity: quantityML },
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -26,7 +26,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import DonorPortalBackground from "../../components/DonorPortalBackground";
 
-const API_URL = "http://localhost:5000/api/donor";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/donor`;
 
 const DonorDashboard = () => {
   const navigate = useNavigate();

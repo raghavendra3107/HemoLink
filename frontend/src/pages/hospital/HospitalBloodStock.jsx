@@ -20,7 +20,7 @@ const HospitalBloodStock = () => {
       setLoading(true);
       const token = localStorage.getItem("token");
       // In HospitalBloodStock component, change the API call:
-const res = await axios.get("http://localhost:5000/api/hospital/blood/stock", {
+const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/hospital/blood/stock`, {
   headers: { Authorization: `Bearer ${token}` },
 });
       

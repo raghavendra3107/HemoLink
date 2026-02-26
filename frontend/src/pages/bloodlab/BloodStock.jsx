@@ -22,7 +22,7 @@ const BloodStock = () => {
   });
 
   const token = localStorage.getItem("token");
-  const API_URL = "http://localhost:5000/api/blood-lab";
+  const API_URL = `${import.meta.env.VITE_API_URL}/api/blood-lab`;
 
   // Blood types for dropdown
   const bloodTypes = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];

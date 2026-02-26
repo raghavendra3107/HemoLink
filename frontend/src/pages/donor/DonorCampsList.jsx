@@ -24,7 +24,7 @@ import { getCoordinates, getCityCoordinates } from '../../utils/geocode';
 import { getGlobalMapMarkers } from '../../utils/mapData';
 
 // NOTE: Ensure this URL matches your running backend API endpoint
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = `${import.meta.env.VITE_API_URL}/api`;
 
 const STATUS_OPTIONS = [
   { value: "all", label: "All Camps" },
