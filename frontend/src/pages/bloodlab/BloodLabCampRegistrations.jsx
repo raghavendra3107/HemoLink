@@ -12,6 +12,7 @@ import {
   Droplet
 } from "lucide-react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { API } from "../../config.js";
 
 const BloodLabCampRegistrations = () => {
   const { id: campId } = useParams();
@@ -30,7 +31,7 @@ const BloodLabCampRegistrations = () => {
   const fetchRegistrations = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/blood-lab/camps/${campId}/registrations`, {
+      const res = await axios.get(`${API}/api/blood-lab/camps/${campId}/registrations`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.data.success) {
@@ -57,7 +58,7 @@ const BloodLabCampRegistrations = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `${import.meta.env.VITE_API_URL}/api/blood-lab/camps/registrations/${registrationId}/status`,
+        `${API}/api/blood-lab/camps/registrations/${registrationId}/status`,
          { status: newStatus, quantity: quantityML },
         { headers: { Authorization: `Bearer ${token}` } }
       );

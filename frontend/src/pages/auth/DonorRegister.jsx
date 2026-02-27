@@ -8,6 +8,7 @@ const GENDERS = ["Male", "Female", "Other"];
 const BLOOD_GROUPS = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
 import { State, City } from 'country-state-city';
+import { API } from "../../config.js";
 const indianStates = State.getStatesOfCountry("IN");
 
 // Validation functions
@@ -270,7 +271,7 @@ export default function DonorRegisterForm() {
       role: "donor",
     };
     
-        const API_URL = `${import.meta.env.VITE_API_URL}/api/auth/register`; 
+        const API_URL = `${API}/api/auth/register`; 
 
     
     console.log("Submitting Donor Data:", submissionPayload);

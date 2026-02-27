@@ -18,8 +18,9 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { API } from "../../config.js";
 
-const API_URL = `${import.meta.env.VITE_API_URL}/api/donor`;
+const API_URL = `${API}/api/donor`;
 
 const DonorDonationHistory = () => {
   const navigate = useNavigate();

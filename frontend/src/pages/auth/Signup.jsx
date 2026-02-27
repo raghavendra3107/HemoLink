@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API } from "../../config.js";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, formData);
+      const res = await axios.post(`${API}/api/auth/register`, formData);
       alert("✅ Registered Successfully!");
       navigate("/login"); // redirect after success
     } catch (err) {

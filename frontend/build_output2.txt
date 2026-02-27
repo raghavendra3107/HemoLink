@@ -1,0 +1,31 @@
+
+> bbms@0.0.0 build
+> vite build
+
+[36mvite v7.2.1 [32mbuilding client environment for production...[36m[39m
+transforming...
+[32m✓[39m 22 modules transformed.
+[31m✗[39m Build failed in 477ms
+[31merror during build:
+[31m[vite:esbuild] Transform failed with 1 error:
+C:/Users/ragha/Downloads/HemoLink/frontend/src/components/layouts/DashboardLayout.jsx:4:7: ERROR: Expected "as" but found "{"[31m
+file: [36mC:/Users/ragha/Downloads/HemoLink/frontend/src/components/layouts/DashboardLayout.jsx:4:7[31m
+[33m
+[33mExpected "as" but found "{"[33m
+2  |  import { Outlet, useNavigate, useLocation } from "react-router-dom";
+3  |  import {
+4  |  import { API } from "../../config.js";
+   |         ^
+5  |    Bell,
+6  |    LogOut,
+[31m
+    at failureErrorWithLog (C:\Users\ragha\Downloads\HemoLink\frontend\node_modules\esbuild\lib\main.js:1467:15)
+    at C:\Users\ragha\Downloads\HemoLink\frontend\node_modules\esbuild\lib\main.js:736:50
+    at responseCallbacks.<computed> (C:\Users\ragha\Downloads\HemoLink\frontend\node_modules\esbuild\lib\main.js:603:9)
+    at handleIncomingPacket (C:\Users\ragha\Downloads\HemoLink\frontend\node_modules\esbuild\lib\main.js:658:12)
+    at Socket.readFromStdout (C:\Users\ragha\Downloads\HemoLink\frontend\node_modules\esbuild\lib\main.js:581:7)
+    at Socket.emit (node:events:524:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)[39m

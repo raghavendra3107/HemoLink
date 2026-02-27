@@ -5,6 +5,7 @@ import { Droplet, MapPin, Phone, Clock, Send } from "lucide-react";
 import MapComponent from "../../components/MapComponent";
 import { getCoordinates } from "../../utils/geocode";
 import { getGlobalMapMarkers } from "../../utils/mapData";
+import { API } from "../../config.js";
 
 const HospitalRequestBlood = () => {
   const [labs, setLabs] = useState([]);
@@ -24,7 +25,7 @@ const HospitalRequestBlood = () => {
       try {
         setLabsLoading(true);
         const token = localStorage.getItem("token");
-        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL || `${import.meta.env.VITE_API_URL}`}/api/facility/labs`, {
+        const res = await axios.get(`${API}/api/facility/labs`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         
@@ -53,7 +54,7 @@ const HospitalRequestBlood = () => {
       const token = localStorage.getItem("token");
 
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL || `${import.meta.env.VITE_API_URL}`}/api/hospital/blood/request`,
+        `${API}/api/hospital/blood/request`,
         form,
         { headers: { Authorization: `Bearer ${token}` } }
       );

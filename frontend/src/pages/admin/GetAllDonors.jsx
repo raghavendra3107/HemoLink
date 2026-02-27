@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
+import { API } from "../../config.js";
 import {
   User,
   Heart,
@@ -20,7 +21,7 @@ import {
   ChevronUp
 } from 'lucide-react';
 
-const API_URL = `${import.meta.env.VITE_API_URL}/api/admin`;
+const API_URL = `${API}/api/admin`;
 
 function GetAllDonors() {
   const [donors, setDonors] = useState([]);

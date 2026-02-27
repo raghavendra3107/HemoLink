@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { API } from "../../config.js";
 import {
   Search,
   User,
@@ -53,7 +54,7 @@ const DonorDirectory = () => {
       });
 
       const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/hospital/donors?${queryParams}`,
+        `${API}/api/hospital/donors?${queryParams}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -84,7 +85,7 @@ const DonorDirectory = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/hopital/donors/${donorId}/contact`,
+        `${API}/api/hopital/donors/${donorId}/contact`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

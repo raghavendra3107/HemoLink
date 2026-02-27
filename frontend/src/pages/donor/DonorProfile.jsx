@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { toast, Toaster } from "react-hot-toast";
+import { API } from "../../config.js";
 import {
   Loader2,
   Save,
@@ -25,7 +26,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
-const API_BASE_URL = `${import.meta.env.VITE_API_URL}/api`;
+const API_BASE_URL = `${API}/api`;
 
 const BLOOD_GROUPS = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
 const GENDER_OPTIONS = [

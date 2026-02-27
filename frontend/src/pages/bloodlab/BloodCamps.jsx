@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { Link, useLocation } from "react-router-dom";
+import { API } from "../../config.js";
 
 const BloodCamps = () => {
   const [camps, setCamps] = useState([]);
@@ -64,7 +65,7 @@ const BloodCamps = () => {
 
   const token = localStorage.getItem("token");
   // Fixed API URL - removed /blood-lab if it doesn't exist
-  const API_URL = `${import.meta.env.VITE_API_URL}/api/blood-lab`;
+  const API_URL = `${API}/api/blood-lab`;
 
   console.log("🔧 BloodCamps Component State:", {
     campsCount: camps.length,

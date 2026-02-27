@@ -22,9 +22,10 @@ import {
 import MapComponent from '../../components/MapComponent';
 import { getCoordinates, getCityCoordinates } from '../../utils/geocode';
 import { getGlobalMapMarkers } from '../../utils/mapData';
+import { API } from "../../config.js";
 
 // NOTE: Ensure this URL matches your running backend API endpoint
-const API_BASE_URL = `${import.meta.env.VITE_API_URL}/api`;
+const API_BASE_URL = `${API}/api`;
 
 const STATUS_OPTIONS = [
   { value: "all", label: "All Camps" },

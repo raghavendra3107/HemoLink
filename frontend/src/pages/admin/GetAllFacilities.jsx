@@ -19,8 +19,9 @@ import {
 } from 'lucide-react';
 import MapComponent from '../../components/MapComponent';
 import { getGlobalMapMarkers } from '../../utils/mapData';
+import { API } from "../../config.js";
 
-const API_URL = `${import.meta.env.VITE_API_URL}/api/admin`;
+const API_URL = `${API}/api/admin`;
 
 function GetAllFacilities() {
   const [facilities, setFacilities] = useState([]);

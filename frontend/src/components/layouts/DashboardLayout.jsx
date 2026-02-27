@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import { API } from "../../config.js";
 import {
   Bell,
   LogOut,
@@ -148,7 +149,7 @@ const DashboardLayout = ({ userRole = "donor" }) => {
       
       while (attempt < maxRetries) {
         try {
-          const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/profile`, {
+          const res = await fetch(`${API}/api/auth/profile`, {
             headers: { Authorization: `Bearer ${token}` },
           });
 

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { 
+import { API } from "../../config.js";
+import {
   Search, 
   User, 
   Phone, 
@@ -44,7 +45,7 @@ const BloodLabDonor = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/blood-lab/donors/search?term=${term}`,
+        `${API}/api/blood-lab/donors/search?term=${term}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -65,7 +66,7 @@ const BloodLabDonor = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/blood-lab/donations/recent`,
+        `${API}/api/blood-lab/donations/recent`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setRecentDonations(res.data.donations || []);
@@ -97,7 +98,7 @@ const BloodLabDonor = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/blood-lab/donors/donate/${selectedDonor._id}`,
+        `${API}/api/blood-lab/donors/donate/${selectedDonor._id}`,
         donationData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -118,7 +119,7 @@ const BloodLabDonor = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/blood-lab/donors/donate/${donorId}`,
+        `${API}/api/blood-lab/donors/donate/${donorId}`,
         { quantity: 1, remarks: "Quick donation" },
         { headers: { Authorization: `Bearer ${token}` } }
       );

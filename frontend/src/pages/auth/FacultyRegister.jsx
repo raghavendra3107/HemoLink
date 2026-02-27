@@ -14,6 +14,7 @@ const FACILITY_CATEGORIES = [
 ];
 
 import { State, City } from 'country-state-city';
+import { API } from "../../config.js";
 const indianStates = State.getStatesOfCountry("IN");
 
 const WORKING_DAYS = [
@@ -290,7 +291,7 @@ export default function FacilityRegisterForm() {
   };
     
     // **YOUR TARGET URL**
-    const API_URL = `${import.meta.env.VITE_API_URL}/api/auth/register`; 
+    const API_URL = `${API}/api/auth/register`; 
     
    console.log("Submitting Data to Backend:", submissionPayload); // Use the new payload
 

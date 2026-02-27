@@ -1,9 +1,10 @@
 import axios from "axios";
 import { getCityCoordinates, getCoordinates } from "./geocode";
+import { API } from "../config.js";
 
 export const getGlobalMapMarkers = async () => {
   try {
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/map-data`);
+    const response = await axios.get(`${API}/api/auth/map-data`);
     const { donors, facilities, camps } = response.data.data;
 
     const markers = [];

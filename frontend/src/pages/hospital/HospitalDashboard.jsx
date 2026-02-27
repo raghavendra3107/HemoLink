@@ -15,6 +15,7 @@ import {
   RefreshCw
 } from "lucide-react";
 import axios from "axios";
+import { API } from "../../config.js";
 
 const HospitalDashboard = () => {
   const [hospital, setHospital] = useState(null);
@@ -41,7 +42,7 @@ const HospitalDashboard = () => {
         }
 
         // Fetch hospital profile
-        const profileRes = await fetch(`${import.meta.env.VITE_API_URL}/api/facility/profile`, {
+        const profileRes = await fetch(`${API}/api/facility/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -61,12 +62,12 @@ const HospitalDashboard = () => {
         }
 
         // Fetch blood stock
-        const stockRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/hospital/blood/stock`, {
+        const stockRes = await axios.get(`${API}/api/hospital/blood/stock`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
         // Fetch blood requests
-        const requestsRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/hospital/blood/requests`, {
+        const requestsRes = await axios.get(`${API}/api/hospital/blood/requests`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

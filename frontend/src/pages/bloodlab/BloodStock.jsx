@@ -10,6 +10,7 @@ import {
   TrendingDown
 } from "lucide-react";
 import { toast } from "react-hot-toast";
+import { API } from "../../config.js";
 
 const BloodStock = () => {
   const [stock, setStock] = useState([]);
@@ -22,7 +23,7 @@ const BloodStock = () => {
   });
 
   const token = localStorage.getItem("token");
-  const API_URL = `${import.meta.env.VITE_API_URL}/api/blood-lab`;
+  const API_URL = `${API}/api/blood-lab`;
 
   // Blood types for dropdown
   const bloodTypes = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
