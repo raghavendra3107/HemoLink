@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: true, // Automatically mirrors the incoming origin, allowing cloud deployment cross-origin requests
+  origin: ["https://hemolink-frontend-eight.vercel.app", "http://localhost:5173"],
   credentials: true,
 }));
 
