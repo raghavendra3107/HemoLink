@@ -1,31 +1,60 @@
 import express from "express";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
+
 import authRoutes from "./routes/authRoutes.js";
 import donorRoutes from "./routes/donorRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import facilityRoutes from "./routes/facilityRoutes.js";
 import bloodLabRoutes from "./routes/bloodLabRoutes.js";
 import hospitalRoutes from "./routes/hospitalRoutes.js";
+
 import { swaggerUi, swaggerDocs } from "./openapi/index.js";
 import connectDB from "./config/db.js";
 
 dotenv.config();
 const app = express();
 
+// =======================
 // Middleware
+// =======================
+
 app.use(express.json());
 
-app.use(cors({
-  origin: true,
-  credentials: true,
-}));
+// ✅ Production CORS Fix
+const allowedOrigins = [
+  "https://hemolink-frontend-eight.vercel.app",
+  "http://localhost:5173",
+];
 
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); // allow server-to-server or postman
+      if (allowedOrigins.indexOf(origin) === -1) {
+        return callback(new Error("Not allowed by CORS"));
+      }
+      return callback(null, true);
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
+
+// ✅ Handle preflight explicitly
+app.options("*", cors());
+
+// =======================
 // Swagger
-app.use('/api/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+// =======================
 
+app.use("/api/doc", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+// =======================
 // Routes
+// =======================
+
 app.use("/api/auth", authRoutes);
 app.use("/api/donor", donorRoutes);
 app.use("/api/facility", facilityRoutes);
@@ -33,19 +62,32 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/blood-lab", bloodLabRoutes);
 app.use("/api/hospital", hospitalRoutes);
 
-// Test route (IMPORTANT)
+// =======================
+// Health Check Route
+// =======================
+
 app.get("/", (req, res) => {
   res.send("Backend is running successfully 🚀");
 });
 
-// DB Connection
+// =======================
+// Database
+// =======================
+
 connectDB();
 
-// Error handler
+// =======================
+// Error Handler
+// =======================
+
 app.use((err, req, res, next) => {
-  console.error("Server Error:", err);
+  console.error("Server Error:", err.message);
   res.status(500).json({ message: "Internal Server Error" });
 });
+
+// =======================
+// Start Server
+// =======================
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
