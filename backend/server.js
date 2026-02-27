@@ -21,29 +21,17 @@ const app = express();
 
 app.use(express.json());
 
-// ✅ Production CORS Fix
-const allowedOrigins = [
-  "https://hemolink-frontend-eight.vercel.app",
-  "http://localhost:5173",
-];
-
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true); // allow server-to-server or postman
-      if (allowedOrigins.indexOf(origin) === -1) {
-        return callback(new Error("Not allowed by CORS"));
-      }
-      return callback(null, true);
-    },
+    origin: [
+      "https://hemolink-frontend-eight.vercel.app",
+      "http://localhost:5173"
+    ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
+    credentials: true
   })
 );
-
-// ✅ Handle preflight explicitly
-app.options("*", cors());
 
 // =======================
 // Swagger
