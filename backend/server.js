@@ -21,17 +21,18 @@ const app = express();
 
 app.use(express.json());
 
+// ✅ Flexible Production CORS (Recommended)
 app.use(
   cors({
-    origin: [
-      "https://hemolink-frontend-eight.vercel.app",
-      "http://localhost:5173"
-    ],
+    origin: true, // allow all Vercel preview + production domains
+    credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true
   })
 );
+
+// ✅ Explicit preflight handling
+app.options("*", cors());
 
 // =======================
 // Swagger
@@ -69,7 +70,7 @@ connectDB();
 // =======================
 
 app.use((err, req, res, next) => {
-  console.error("Server Error:", err.message);
+  console.error("Server Error:", err);
   res.status(500).json({ message: "Internal Server Error" });
 });
 
@@ -78,6 +79,7 @@ app.use((err, req, res, next) => {
 // =======================
 
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT} 🚀`);
 });
