@@ -31,8 +31,6 @@ app.use(
   })
 );
 
-// ✅ Explicit preflight handling
-app.options("*", cors());
 
 // =======================
 // Swagger
