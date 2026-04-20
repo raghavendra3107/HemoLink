@@ -13,7 +13,9 @@ const HospitalRequestBlood = () => {
   const [form, setForm] = useState({
     labId: "",
     bloodType: "",
-    units: ""
+    units: "",
+    patientProofUrl: "",
+    patientDetails: ""
   });
   const [loading, setLoading] = useState(false);
   const [labsLoading, setLabsLoading] = useState(true);
@@ -60,7 +62,7 @@ const HospitalRequestBlood = () => {
       );
 
       toast.success("Blood request sent successfully!");
-      setForm({ labId: "", bloodType: "", units: "" });
+      setForm({ labId: "", bloodType: "", units: "", patientProofUrl: "", patientDetails: "" });
     } catch (err) {
       console.error("Submit request error:", err);
       toast.error(err.response?.data?.message || "Failed to send request");
@@ -158,6 +160,35 @@ const HospitalRequestBlood = () => {
                   required
                 />
                 <p className="text-sm text-gray-500 mt-1">Minimum 1 unit, maximum 100 units</p>
+              </div>
+
+              {/* Patient Proof & Details */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Patient Photo / Medical Proof URL
+                </label>
+                <input
+                  type="url"
+                  className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors"
+                  value={form.patientProofUrl}
+                  onChange={(e) => setForm({ ...form, patientProofUrl: e.target.value })}
+                  placeholder="https://imgur.com/... or Google Drive Link"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Patient Details & Reason
+                </label>
+                <textarea
+                  className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors"
+                  value={form.patientDetails}
+                  onChange={(e) => setForm({ ...form, patientDetails: e.target.value })}
+                  placeholder="Explain the patient's condition and reason for the blood requirement..."
+                  rows="3"
+                  required
+                ></textarea>
               </div>
 
               {/* Submit Button */}

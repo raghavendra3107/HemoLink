@@ -22,6 +22,8 @@ const bloodRequestSchema = new mongoose.Schema({
     required: true, 
     min: 1 
   },
+  patientProofUrl: { type: String, required: true },
+  patientDetails: { type: String, required: true },
   status: { 
     type: String, 
     enum: ["pending", "accepted", "rejected"], 

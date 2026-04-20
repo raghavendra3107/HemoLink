@@ -133,6 +133,7 @@ const LabManageRequests = () => {
                     <th className="p-4 text-left font-semibold text-gray-700">Hospital</th>
                     <th className="p-4 text-left font-semibold text-gray-700">Blood Type</th>
                     <th className="p-4 text-left font-semibold text-gray-700">Units</th>
+                    <th className="p-4 text-left font-semibold text-gray-700">Patient Details</th>
                     <th className="p-4 text-left font-semibold text-gray-700">Status</th>
                     <th className="p-4 text-left font-semibold text-gray-700">Date</th>
                     <th className="p-4 text-left font-semibold text-gray-700">Actions</th>
@@ -165,6 +166,22 @@ const LabManageRequests = () => {
                       <td className="p-4">
                         <span className="text-lg font-semibold text-gray-800">{req.units}</span>
                         <span className="text-sm text-gray-500 ml-1">units</span>
+                      </td>
+                      <td className="p-4 max-w-[200px]">
+                        {req.patientDetails ? (
+                          <div className="flex flex-col gap-1">
+                            <span className="text-sm text-gray-700 truncate line-clamp-2" title={req.patientDetails}>
+                              {req.patientDetails}
+                            </span>
+                            {req.patientProofUrl && (
+                              <a href={req.patientProofUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:text-blue-800 hover:underline flex items-center">
+                                📄 View Proof
+                              </a>
+                            )}
+                          </div>
+                        ) : (
+                          <span className="text-xs italic text-gray-400">None provided</span>
+                        )}
                       </td>
                       <td className="p-4">
                         {getStatusBadge(req.status)}

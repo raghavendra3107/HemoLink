@@ -15,13 +15,13 @@ import Donor from "../models/donorModel.js";
 export const hospitalRequestBlood = async (req, res) => {
   try {
     const hospitalId = req.user._id;
-    const { labId, bloodType, units } = req.body;
+    const { labId, bloodType, units, patientProofUrl, patientDetails } = req.body;
 
     // Validation
-    if (!labId || !bloodType || !units) {
+    if (!labId || !bloodType || !units || !patientProofUrl || !patientDetails) {
       return res.status(400).json({
         success: false,
-        message: "Please provide labId, bloodType, and units"
+        message: "Please provide labId, bloodType, units, patient proof, and details"
       });
     }
 
@@ -51,7 +51,9 @@ export const hospitalRequestBlood = async (req, res) => {
       hospitalId,
       labId,
       bloodType,
-      units
+      units,
+      patientProofUrl,
+      patientDetails
     });
 
     // Add to hospital history
