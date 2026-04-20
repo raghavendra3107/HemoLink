@@ -155,6 +155,11 @@ const LabManageRequests = () => {
                               <MapPin size={12} />
                               {req.hospitalId?.address?.city || "Unknown City"}
                             </div>
+                            {req.hospitalQuota && (
+                              <div className="mt-1 text-xs px-2 py-0.5 bg-yellow-50 text-yellow-800 border border-yellow-200 rounded inline-block font-medium shadow-sm">
+                                Monthly Quota: {req.hospitalQuota.used}/{req.hospitalQuota.limit} Used
+                              </div>
+                            )}
                           </div>
                         </div>
                       </td>

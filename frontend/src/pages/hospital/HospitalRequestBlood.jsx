@@ -19,6 +19,7 @@ const HospitalRequestBlood = () => {
   });
   const [loading, setLoading] = useState(false);
   const [labsLoading, setLabsLoading] = useState(true);
+  const [quota, setQuota] = useState({ usedUnits: 0, limit: 50, availableUnits: 50 });
 
   const bloodTypes = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
 
@@ -34,6 +35,11 @@ const HospitalRequestBlood = () => {
         const loadedLabs = res.data.labs || [];
         setLabs(loadedLabs);
         
+        const quotaRes = await axios.get(`${API}/api/hospital/blood/quota`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setQuota(quotaRes.data);
+
         // Fetch global markers for the map
         const globalMarkers = await getGlobalMapMarkers();
         setMarkers(globalMarkers);
@@ -63,6 +69,11 @@ const HospitalRequestBlood = () => {
 
       toast.success("Blood request sent successfully!");
       setForm({ labId: "", bloodType: "", units: "", patientProofUrl: "", patientDetails: "" });
+      
+      const quotaRes = await axios.get(`${API}/api/hospital/blood/quota`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setQuota(quotaRes.data);
     } catch (err) {
       console.error("Submit request error:", err);
       toast.error(err.response?.data?.message || "Failed to send request");
@@ -85,6 +96,19 @@ const HospitalRequestBlood = () => {
               <h1 className="text-3xl font-bold text-gray-800">Request Blood</h1>
             </div>
             <p className="text-gray-600">Request blood units from approved blood labs</p>
+          </div>
+
+          {/* Quota Disclaimer */}
+          <div className="bg-white rounded-2xl shadow-lg border border-red-100 p-6 flex flex-col pt-4">
+               <h3 className="text-lg font-semibold text-gray-800 mb-2">Monthly Blood Quota</h3>
+               <div className="w-full bg-gray-200 rounded-full h-2.5 mb-2">
+                 <div className="bg-red-600 h-2.5 rounded-full" style={{ width: `${(quota.usedUnits / quota.limit) * 100}%` }}></div>
+               </div>
+               <div className="flex justify-between text-sm text-gray-600">
+                 <span>Used: {quota.usedUnits} units</span>
+                 <span className="font-semibold text-red-600">Available: {quota.availableUnits} units</span>
+                 <span>Limit: {quota.limit} units/mo</span>
+               </div>
           </div>
 
           {/* Request Form */}
@@ -154,12 +178,12 @@ const HospitalRequestBlood = () => {
                   className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors"
                   value={form.units}
                   min="1"
-                  max="100"
+                  max={quota.availableUnits}
                   onChange={(e) => setForm({ ...form, units: e.target.value })}
                   placeholder="Enter number of units"
                   required
                 />
-                <p className="text-sm text-gray-500 mt-1">Minimum 1 unit, maximum 100 units</p>
+                <p className="text-sm text-gray-500 mt-1">Minimum 1 unit, max available: {quota.availableUnits} units</p>
               </div>
 
               {/* Patient Proof & Details */}

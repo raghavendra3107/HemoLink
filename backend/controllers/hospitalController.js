@@ -32,6 +32,29 @@ export const hospitalRequestBlood = async (req, res) => {
       });
     }
 
+    const today = new Date();
+    const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
+    const currentMonthRequests = await BloodRequest.aggregate([
+      { 
+        $match: { 
+          hospitalId, 
+          createdAt: { $gte: startOfMonth }, 
+          status: { $ne: "rejected" } 
+        } 
+      },
+      { $group: { _id: null, totalUnits: { $sum: "$units" } } }
+    ]);
+    
+    const usedUnits = currentMonthRequests.length > 0 ? currentMonthRequests[0].totalUnits : 0;
+    
+    if (usedUnits + Number(units) > 50) {
+      return res.status(400).json({
+        success: false,
+        message: `Monthly quota exceeded. You have ${Math.max(0, 50 - usedUnits)} units left this month.`
+      });
+    }
+
     // Check if lab exists and is approved
     const lab = await Facility.findOne({ 
       _id: labId, 
@@ -112,6 +135,36 @@ export const getHospitalRequests = async (req, res) => {
 /* ==============================================================
    HOSPITAL DASHBOARD & INVENTORY
    ============================================================== */
+
+export const getHospitalQuota = async (req, res) => {
+  try {
+    const hospitalId = req.user._id;
+    const today = new Date();
+    const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
+    const currentMonthRequests = await BloodRequest.aggregate([
+      { 
+        $match: { 
+          hospitalId, 
+          createdAt: { $gte: startOfMonth }, 
+          status: { $ne: "rejected" } 
+        } 
+      },
+      { $group: { _id: null, totalUnits: { $sum: "$units" } } }
+    ]);
+    
+    const usedUnits = currentMonthRequests.length > 0 ? currentMonthRequests[0].totalUnits : 0;
+    
+    res.json({
+      success: true,
+      usedUnits,
+      limit: 50,
+      availableUnits: Math.max(0, 50 - usedUnits)
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Error calculating quota" });
+  }
+};
 
 export const getHospitalDashboard = async (req, res) => {
   try {

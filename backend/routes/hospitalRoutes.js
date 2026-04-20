@@ -7,7 +7,8 @@ import {
   getHospitalStock,
   getHospitalHistory,
   getAllDonors,
-  logContactAttempt
+  logContactAttempt,
+  getHospitalQuota
 } from "../controllers/hospitalController.js";
 
 const router = express.Router();
@@ -15,6 +16,7 @@ const router = express.Router();
 // Blood request routes for hospitals
 router.post("/blood/request", protectFacility, hospitalRequestBlood);
 router.get("/blood/requests", protectFacility, getHospitalRequests);
+router.get("/blood/quota", protectFacility, getHospitalQuota);
 
 // Dashboard routes
 router.get("/dashboard", protectFacility, getHospitalDashboard);

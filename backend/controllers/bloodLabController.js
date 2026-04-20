@@ -531,9 +531,38 @@ export const getLabBloodRequests = async (req, res) => {
   try {
     const labId = req.user._id;
 
-    const requests = await BloodRequest.find({ labId })
+    let requests = await BloodRequest.find({ labId })
       .populate("hospitalId", "name email phone address")
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: -1 })
+      .lean();
+
+    const today = new Date();
+    const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
+    // Attach current month quota usage to each request so labs can see it
+    requests = await Promise.all(requests.map(async (reqItem) => {
+      if (!reqItem.hospitalId) return reqItem;
+
+      const currentMonthRequests = await BloodRequest.aggregate([
+        { 
+          $match: { 
+            hospitalId: reqItem.hospitalId._id, 
+            createdAt: { $gte: startOfMonth }, 
+            status: { $ne: "rejected" } 
+          } 
+        },
+        { $group: { _id: null, totalUnits: { $sum: "$units" } } }
+      ]);
+      const usedUnits = currentMonthRequests.length > 0 ? currentMonthRequests[0].totalUnits : 0;
+      
+      reqItem.hospitalQuota = {
+        used: usedUnits,
+        limit: 50,
+        available: Math.max(0, 50 - usedUnits)
+      };
+
+      return reqItem;
+    }));
 
     res.status(200).json({
       success: true,
