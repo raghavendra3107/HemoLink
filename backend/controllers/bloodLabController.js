@@ -25,6 +25,17 @@ export const getBloodLabDashboard = async (req, res) => {
       Facility.findById(labId).select('history name email phone address operatingHours status lastLogin') // select relevant fields
     ]);
 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    camps.forEach((camp) => {
+      const campDate = new Date(camp.date);
+      if (campDate < today && camp.status === "Upcoming") {
+        camp.status = "Completed";
+        BloodCamp.findByIdAndUpdate(camp._id, { status: "Completed" }).exec(); // update in DB silently
+      }
+    });
+
     const totalCamps = camps.length;
     const upcomingCamps = camps.filter((c) => c.status === "Upcoming").length;
     const completedCamps = camps.filter((c) => c.status === "Completed").length;
@@ -172,10 +183,22 @@ export const getBloodLabCamps = async (req, res) => {
       BloodCamp.countDocuments(filter),
     ]);
 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const updatedCamps = camps.map((camp) => {
+      const campDate = new Date(camp.date);
+      if (campDate < today && camp.status === "Upcoming") {
+        camp.status = "Completed";
+        BloodCamp.findByIdAndUpdate(camp._id, { status: "Completed" }).exec();
+      }
+      return camp;
+    });
+
     res.json({
       success: true,
       data: {
-        camps,
+        camps: updatedCamps,
         pagination: {
           total,
           currentPage: parseInt(page),
