@@ -286,7 +286,8 @@ export default function FacilityRegisterForm() {
     const sum = parseInt(lastTwo[0] || "0") + parseInt(lastTwo[1] || "0");
     const expectedOtp = OTP_LIST[isNaN(sum) ? 0 : sum];
 
-    const enteredOtp = window.prompt(`[MOCK SMS RECEIVER]\nMessage from HemoLink: Your Verification Code is ${expectedOtp}\n\n-----\nPlease enter this 4-digit code below to construct your account:`);
+    window.alert(`📱 [NEW SMS MESSAGE to ${formData.phone}]\n\nFrom: HemoLink\nYour verification code is: ${expectedOtp}`);
+    const enteredOtp = window.prompt(`Please enter the 4-digit code that was just sent to ${formData.phone}:`);
 
     if (enteredOtp !== expectedOtp) {
       toast.error("❌ Invalid OTP Code. Registration aborted.");
