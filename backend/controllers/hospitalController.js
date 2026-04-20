@@ -47,12 +47,20 @@ export const hospitalRequestBlood = async (req, res) => {
       { $group: { _id: null, totalUnits: { $sum: "$units" } } }
     ]);
     
-    const usedUnits = currentMonthRequests.length > 0 ? currentMonthRequests[0].totalUnits : 0;
+    // Variable limits map
+    const QUOTA_LIMITS = {
+      "O+": 50, "O-": 10,
+      "A+": 30, "A-": 15,
+      "B+": 25, "B-": 10,
+      "AB+": 10, "AB-": 10
+    };
     
-    if (usedUnits + Number(units) > 50) {
+    const limit = QUOTA_LIMITS[bloodType] || 20;
+
+    if (usedUnits + Number(units) > limit) {
       return res.status(400).json({
         success: false,
-        message: `Monthly quota for ${bloodType} exceeded. You have ${Math.max(0, 50 - usedUnits)} units left this month for this blood type.`
+        message: `Monthly quota for ${bloodType} exceeded. You have ${Math.max(0, limit - usedUnits)} units left this month for this blood type.`
       });
     }
 
@@ -155,15 +163,22 @@ export const getHospitalQuota = async (req, res) => {
     ]);
     
     const quotaByGroup = {};
+    const QUOTA_LIMITS = {
+      "O+": 50, "O-": 10,
+      "A+": 30, "A-": 15,
+      "B+": 25, "B-": 10,
+      "AB+": 10, "AB-": 10
+    };
     const bloodTypes = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
     
     bloodTypes.forEach(bt => {
         const found = currentMonthRequests.find(r => r._id === bt);
         const used = found ? found.totalUnits : 0;
+        const limit = QUOTA_LIMITS[bt] || 20;
         quotaByGroup[bt] = {
             usedUnits: used,
-            limit: 50,
-            availableUnits: Math.max(0, 50 - used)
+            limit: limit,
+            availableUnits: Math.max(0, limit - used)
         };
     });
     
