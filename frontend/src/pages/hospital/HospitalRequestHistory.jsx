@@ -168,6 +168,12 @@ const HospitalRequestHistory = () => {
                           ) : (
                             <span className="text-gray-400">Not processed</span>
                           )}
+                          
+                          {request.notes && (
+                            <div className="mt-2 text-xs p-2 bg-yellow-50 border border-yellow-100 rounded text-gray-700 italic max-w-[200px]">
+                              "{request.notes}"
+                            </div>
+                          )}
                         </td>
                       </tr>
                     );

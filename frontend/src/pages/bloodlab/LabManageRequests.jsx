@@ -7,6 +7,10 @@ import { API } from "../../config.js";
 const LabManageRequests = () => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
+  
+  // Dialog state for collecting feedback notes
+  const [actionDialog, setActionDialog] = useState(null); // { id: string, action: "accept" | "reject" }
+  const [feedbackNotes, setFeedbackNotes] = useState("");
 
   const loadRequests = async () => {
     try {
@@ -28,18 +32,21 @@ const LabManageRequests = () => {
     loadRequests();
   }, []);
 
-  const updateStatus = async (id, action) => {
+  const confirmAction = async () => {
+    if (!actionDialog) return;
     try {
       const token = localStorage.getItem("token");
 
       await axios.put(
-        `${API}/api/blood-lab/blood/requests/${id}`,
-        { action },
+        `${API}/api/blood-lab/blood/requests/${actionDialog.id}`,
+        { action: actionDialog.action, notes: feedbackNotes },
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      toast.success(`Request ${action}ed successfully`);
-      loadRequests(); // Refresh the list
+      toast.success(`Request ${actionDialog.action}ed successfully`);
+      loadRequests();
+      setActionDialog(null);
+      setFeedbackNotes("");
     } catch (err) {
       console.error("Update status error:", err);
       toast.error(err.response?.data?.message || "Failed to update request");
@@ -202,14 +209,14 @@ const LabManageRequests = () => {
                         {req.status === "pending" && (
                           <div className="flex gap-2">
                             <button
-                              onClick={() => updateStatus(req._id, "accept")}
+                              onClick={() => { setActionDialog({ id: req._id, action: "accept" }); setFeedbackNotes(""); }}
                               className="flex items-center gap-1 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
                             >
                               <CheckCircle size={16} />
                               Accept
                             </button>
                             <button
-                              onClick={() => updateStatus(req._id, "reject")}
+                              onClick={() => { setActionDialog({ id: req._id, action: "reject" }); setFeedbackNotes(""); }}
                               className="flex items-center gap-1 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
                             >
                               <XCircle size={16} />
@@ -231,6 +238,44 @@ const LabManageRequests = () => {
           )}
         </div>
       </div>
+
+      {/* Feedback Dialog Modal */}
+      {actionDialog && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl">
+            <h3 className="text-xl font-bold text-gray-800 mb-2">
+              {actionDialog.action === "accept" ? "Accept Request" : "Reject Request"}
+            </h3>
+            <p className="text-sm text-gray-600 mb-4">
+              Please provide feedback or notes for the hospital (e.g. ETA, reason for rejection).
+            </p>
+            <textarea
+              className="w-full border border-gray-300 rounded-xl p-3 focus:ring-2 focus:ring-red-500 min-h-[100px] mb-4"
+              placeholder="Enter your notes here..."
+              value={feedbackNotes}
+              onChange={(e) => setFeedbackNotes(e.target.value)}
+            ></textarea>
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => setActionDialog(null)}
+                className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                disabled={loading}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmAction}
+                className={`px-4 py-2 text-white rounded-lg transition-colors ${
+                  actionDialog.action === "accept" ? "bg-green-600 hover:bg-green-700" : "bg-red-600 hover:bg-red-700"
+                }`}
+                disabled={loading}
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

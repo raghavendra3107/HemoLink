@@ -19,7 +19,7 @@ const HospitalRequestBlood = () => {
   });
   const [loading, setLoading] = useState(false);
   const [labsLoading, setLabsLoading] = useState(true);
-  const [quota, setQuota] = useState({ usedUnits: 0, limit: 50, availableUnits: 50 });
+  const [quotaData, setQuotaData] = useState(null);
 
   const bloodTypes = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
 
@@ -38,7 +38,7 @@ const HospitalRequestBlood = () => {
         const quotaRes = await axios.get(`${API}/api/hospital/blood/quota`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setQuota(quotaRes.data);
+        setQuotaData(quotaRes.data.quotaByGroup);
 
         // Fetch global markers for the map
         const globalMarkers = await getGlobalMapMarkers();
@@ -73,7 +73,7 @@ const HospitalRequestBlood = () => {
       const quotaRes = await axios.get(`${API}/api/hospital/blood/quota`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setQuota(quotaRes.data);
+      setQuotaData(quotaRes.data.quotaByGroup);
     } catch (err) {
       console.error("Submit request error:", err);
       toast.error(err.response?.data?.message || "Failed to send request");
@@ -100,15 +100,24 @@ const HospitalRequestBlood = () => {
 
           {/* Quota Disclaimer */}
           <div className="bg-white rounded-2xl shadow-lg border border-red-100 p-6 flex flex-col pt-4">
-               <h3 className="text-lg font-semibold text-gray-800 mb-2">Monthly Blood Quota</h3>
-               <div className="w-full bg-gray-200 rounded-full h-2.5 mb-2">
-                 <div className="bg-red-600 h-2.5 rounded-full" style={{ width: `${(quota.usedUnits / quota.limit) * 100}%` }}></div>
-               </div>
-               <div className="flex justify-between text-sm text-gray-600">
-                 <span>Used: {quota.usedUnits} units</span>
-                 <span className="font-semibold text-red-600">Available: {quota.availableUnits} units</span>
-                 <span>Limit: {quota.limit} units/mo</span>
-               </div>
+               <h3 className="text-lg font-semibold text-gray-800 mb-2">Monthly Blood Quota {form.bloodType ? `(${form.bloodType})` : ""}</h3>
+               
+               {!form.bloodType ? (
+                 <p className="text-gray-500 text-sm">Please select a blood type below to view your available request limits.</p>
+               ) : quotaData && quotaData[form.bloodType] ? (
+                 <>
+                   <div className="w-full bg-gray-200 rounded-full h-2.5 mb-2">
+                     <div className="bg-red-600 h-2.5 rounded-full" style={{ width: `${(quotaData[form.bloodType].usedUnits / quotaData[form.bloodType].limit) * 100}%` }}></div>
+                   </div>
+                   <div className="flex justify-between text-sm text-gray-600">
+                     <span>Used: {quotaData[form.bloodType].usedUnits} units</span>
+                     <span className="font-semibold text-red-600">Available: {quotaData[form.bloodType].availableUnits} units</span>
+                     <span>Limit: {quotaData[form.bloodType].limit} units/mo</span>
+                   </div>
+                 </>
+               ) : (
+                 <p className="text-gray-500 text-sm">Loading quota limits...</p>
+               )}
           </div>
 
           {/* Request Form */}
@@ -178,12 +187,18 @@ const HospitalRequestBlood = () => {
                   className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors"
                   value={form.units}
                   min="1"
-                  max={quota.availableUnits}
+                  max={form.bloodType && quotaData && quotaData[form.bloodType] ? quotaData[form.bloodType].availableUnits : 100}
                   onChange={(e) => setForm({ ...form, units: e.target.value })}
                   placeholder="Enter number of units"
+                  disabled={!form.bloodType}
                   required
                 />
-                <p className="text-sm text-gray-500 mt-1">Minimum 1 unit, max available: {quota.availableUnits} units</p>
+                <p className="text-sm text-gray-500 mt-1">
+                  {form.bloodType && quotaData && quotaData[form.bloodType] 
+                    ? `Minimum 1 unit, max available: ${quotaData[form.bloodType].availableUnits} units`
+                    : "Please select a blood type first"
+                  }
+                </p>
               </div>
 
               {/* Patient Proof & Details */}
