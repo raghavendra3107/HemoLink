@@ -158,10 +158,16 @@ const LabManageRequests = () => {
                           </div>
                           <div>
                             <div className="font-medium text-gray-800">{req.hospitalId?.name || "Unknown Hospital"}</div>
-                            <div className="flex items-center gap-1 text-sm text-gray-500">
+                            <a 
+                                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((req.hospitalId?.name || '') + ', ' + (req.hospitalId?.address?.city || ''))}`}
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="flex flex-wrap items-center gap-1 text-sm text-blue-500 hover:text-blue-700 hover:underline cursor-pointer"
+                                title="Open in Google Maps"
+                            >
                               <MapPin size={12} />
                               {req.hospitalId?.address?.city || "Unknown City"}
-                            </div>
+                            </a>
                             {req.hospitalQuota && (
                               <div className="mt-1 text-xs px-2 py-0.5 bg-yellow-50 text-yellow-800 border border-yellow-200 rounded inline-block font-medium shadow-sm">
                                 Monthly Quota: {req.hospitalQuota.used}/{req.hospitalQuota.limit} Used

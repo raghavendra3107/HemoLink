@@ -127,10 +127,16 @@ const HospitalRequestHistory = () => {
                             </div>
                             <div>
                               <div className="font-medium text-gray-800">{request.labId?.name || "Unknown Lab"}</div>
-                              <div className="flex items-center gap-1 text-sm text-gray-500">
+                              <a 
+                                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((request.labId?.name || '') + ', ' + (request.labId?.address?.city || ''))}`}
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="flex flex-wrap items-center gap-1 text-sm text-blue-500 hover:text-blue-700 hover:underline cursor-pointer"
+                                title="Open in Google Maps"
+                              >
                                 <MapPin size={12} />
                                 {request.labId?.address?.city || "Unknown City"}
-                              </div>
+                              </a>
                             </div>
                           </div>
                         </td>

@@ -284,10 +284,16 @@ const HospitalRequestBlood = () => {
                   <div key={lab._id} className="flex items-center justify-between p-3 border border-gray-100 rounded-lg hover:border-red-200 transition-colors">
                     <div>
                       <div className="font-medium text-gray-800">{lab.name}</div>
-                      <div className="text-sm text-gray-500 flex items-center gap-1 mt-1">
-                        <MapPin size={12} className="text-slate-400" />
+                      <a 
+                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(lab.address?.street + ', ' + lab.address?.city)}`}
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-sm text-blue-500 hover:text-blue-700 hover:underline flex items-center gap-1 mt-1 cursor-pointer"
+                        title="View on Google Maps"
+                      >
+                        <MapPin size={12} />
                         {lab.address?.street}, {lab.address?.city}
-                      </div>
+                      </a>
                     </div>
                     <div className="text-right">
                       <div className="text-sm text-gray-600 flex items-center gap-1 justify-end">
