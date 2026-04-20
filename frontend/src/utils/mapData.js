@@ -19,7 +19,7 @@ export const getGlobalMapMarkers = async () => {
             lat: coords.lat,
             lon: coords.lon,
             title: donor.fullName || "Donor",
-            description: `Blood: ${donor.bloodGroup || 'Any'} | Location: ${donor.address.city}, ${donor.address.state}`,
+            description: `Blood: ${donor.bloodGroup || 'Any'} | Phone: ${donor.phone || 'N/A'} | Location: ${donor.address.city}, ${donor.address.state}`,
             color: "#3b82f6", // Blue for donor
             type: "Donor"
           });
@@ -40,7 +40,7 @@ export const getGlobalMapMarkers = async () => {
             lat: coords.lat,
             lon: coords.lon,
             title: facility.name,
-            description: `Status: ${facility.status} | Location: ${facility.address.city}, ${facility.address.state}`,
+            description: `Status: ${facility.status} | Phone: ${facility.phone || 'N/A'} | Location: ${facility.address.city}, ${facility.address.state}`,
             color: color,
             type: typeLabel
           });
