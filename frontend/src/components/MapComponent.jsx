@@ -27,20 +27,52 @@ const createColoredIcon = (color) => {
   });
 };
 
-/**
- * Component to auto-adjust map bounds when markers change
- */
 const MapUpdater = ({ markers }) => {
   const map = useMap();
+  const [hasFit, setHasFit] = React.useState(false);
 
   useEffect(() => {
-    if (markers.length > 0) {
+    if (markers.length > 0 && !hasFit) {
       const bounds = L.latLngBounds(markers.map((m) => [m.lat, m.lon]));
       map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
+      setHasFit(true);
     }
-  }, [markers, map]);
+  }, [markers, map, hasFit]);
 
   return null;
+};
+
+/**
+ * Component to locate the user's browser location
+ */
+const LocationFinder = () => {
+  const map = useMap();
+  const [userLoc, setUserLoc] = React.useState(null);
+
+  useEffect(() => {
+    // Automatically ask for location and smoothly fly there with zoom level 12
+    map.locate({ setView: true, maxZoom: 12, enableHighAccuracy: true });
+
+    map.on('locationfound', function (e) {
+      setUserLoc(e.latlng);
+    });
+  }, [map]);
+
+  const userIcon = L.divIcon({
+    className: 'custom-user-icon',
+    html: `<div style="background-color: #3b82f6; width: 18px; height: 18px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 10px rgba(59,130,246,0.8); animation: pulse 2s infinite;"></div>
+    <style>@keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59,130,246,0.7); } 70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(59,130,246,0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59,130,246,0); } }</style>`,
+    iconSize: [18, 18],
+    iconAnchor: [9, 9]
+  });
+
+  return userLoc ? (
+    <Marker position={userLoc} icon={userIcon} zIndexOffset={1000}>
+      <Popup>
+        <div className="text-center font-semibold text-blue-600">You are here 📍</div>
+      </Popup>
+    </Marker>
+  ) : null;
 };
 
 /**
@@ -64,6 +96,7 @@ const MapComponent = ({ markers = [], center = [20.5937, 78.9629], zoom = 5 }) =
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <MapUpdater markers={markers} />
+        <LocationFinder />
         
         {markers.map((marker, i) => {
             if (!marker.lat || !marker.lon) return null;
