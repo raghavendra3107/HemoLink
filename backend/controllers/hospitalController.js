@@ -35,17 +35,14 @@ export const hospitalRequestBlood = async (req, res) => {
     const today = new Date();
     const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 
-    const currentMonthRequests = await BloodRequest.aggregate([
-      { 
-        $match: { 
-          hospitalId, 
-          bloodType,
-          createdAt: { $gte: startOfMonth }, 
-          status: { $ne: "rejected" } 
-        } 
-      },
-      { $group: { _id: null, totalUnits: { $sum: "$units" } } }
-    ]);
+    const currentMonthRequests = await BloodRequest.find({
+      hospitalId, 
+      bloodType,
+      createdAt: { $gte: startOfMonth }, 
+      status: { $ne: "rejected" }
+    });
+    
+    const usedUnits = currentMonthRequests.reduce((sum, r) => sum + r.units, 0);
     
     // Variable limits map
     const QUOTA_LIMITS = {
@@ -151,16 +148,11 @@ export const getHospitalQuota = async (req, res) => {
     const today = new Date();
     const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 
-    const currentMonthRequests = await BloodRequest.aggregate([
-      { 
-        $match: { 
-          hospitalId, 
-          createdAt: { $gte: startOfMonth }, 
-          status: { $ne: "rejected" } 
-        } 
-      },
-      { $group: { _id: "$bloodType", totalUnits: { $sum: "$units" } } }
-    ]);
+    const currentMonthRequests = await BloodRequest.find({
+      hospitalId, 
+      createdAt: { $gte: startOfMonth }, 
+      status: { $ne: "rejected" }
+    });
     
     const quotaByGroup = {};
     const QUOTA_LIMITS = {
@@ -172,8 +164,7 @@ export const getHospitalQuota = async (req, res) => {
     const bloodTypes = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
     
     bloodTypes.forEach(bt => {
-        const found = currentMonthRequests.find(r => r._id === bt);
-        const used = found ? found.totalUnits : 0;
+        const used = currentMonthRequests.filter(r => r.bloodType === bt).reduce((sum, r) => sum + r.units, 0);
         const limit = QUOTA_LIMITS[bt] || 20;
         quotaByGroup[bt] = {
             usedUnits: used,
