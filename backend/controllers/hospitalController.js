@@ -49,10 +49,10 @@ export const hospitalRequestBlood = async (req, res) => {
     
     // Variable limits map
     const QUOTA_LIMITS = {
-      "O+": 50, "O-": 10,
-      "A+": 30, "A-": 15,
-      "B+": 25, "B-": 10,
-      "AB+": 10, "AB-": 10
+      "O+": 50, "O-": 20,
+      "A+": 30, "A-": 20,
+      "B+": 25, "B-": 15,
+      "AB+": 20, "AB-": 10
     };
     
     const limit = QUOTA_LIMITS[bloodType] || 20;
@@ -164,10 +164,10 @@ export const getHospitalQuota = async (req, res) => {
     
     const quotaByGroup = {};
     const QUOTA_LIMITS = {
-      "O+": 50, "O-": 10,
-      "A+": 30, "A-": 15,
-      "B+": 25, "B-": 10,
-      "AB+": 10, "AB-": 10
+      "O+": 50, "O-": 20,
+      "A+": 30, "A-": 20,
+      "B+": 25, "B-": 15,
+      "AB+": 20, "AB-": 10
     };
     const bloodTypes = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
     

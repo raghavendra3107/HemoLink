@@ -556,10 +556,10 @@ export const getLabBloodRequests = async (req, res) => {
       const usedUnits = currentMonthRequests.length > 0 ? currentMonthRequests[0].totalUnits : 0;
       
       const QUOTA_LIMITS = {
-        "O+": 50, "O-": 10,
-        "A+": 30, "A-": 15,
-        "B+": 25, "B-": 10,
-        "AB+": 10, "AB-": 10
+        "O+": 50, "O-": 20,
+        "A+": 30, "A-": 20,
+        "B+": 25, "B-": 15,
+        "AB+": 20, "AB-": 10
       };
       const limit = QUOTA_LIMITS[reqItem.bloodType] || 20;
 
