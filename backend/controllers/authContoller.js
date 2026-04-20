@@ -9,7 +9,7 @@ export const getMapData = async (req, res) => {
   try {
     const donors = await Donor.find({}).select('fullName email phone address bloodGroup gender role');
     const facilities = await Facility.find({}).select('name email phone address facilityType status role is24x7 operatingHours');
-    const camps = await BloodCamp.find({ status: { $ne: "Cancelled" } }).select('title description date time location status hospital expectedDonors');
+    const camps = await BloodCamp.find({ status: { $in: ["Upcoming", "Ongoing"] } }).select('title description date time location status hospital expectedDonors');
 
     res.status(200).json({
       success: true,
