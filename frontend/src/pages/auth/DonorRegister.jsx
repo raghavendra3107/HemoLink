@@ -255,30 +255,6 @@ export default function DonorRegisterForm() {
     
     setIsSubmitting(true);
 
-    // --- Mock OTP Logic ---
-    const OTP_LIST = [
-      "3842", "9157", "2749", "6183", "4925", 
-      "8371", "5094", "1638", "7250", "9416",
-      "2853", "7391", "6028", "4175", "8502",
-      "1937", "5482", "3709", "9264", "6518"
-    ];
-    
-    const phoneStr = formData.phone || "00";
-    const lastTwo = phoneStr.slice(-2);
-    const sum = parseInt(lastTwo[0] || "0") + parseInt(lastTwo[1] || "0");
-    const expectedOtp = OTP_LIST[isNaN(sum) ? 0 : sum];
-
-    window.alert(`📱 [NEW SMS MESSAGE to ${formData.phone}]\n\nFrom: HemoLink\nYour verification code is: ${expectedOtp}`);
-    const enteredOtp = window.prompt(`Please enter the 4-digit code that was just sent to ${formData.phone}:`);
-
-    if (enteredOtp !== expectedOtp) {
-      toast.error("❌ Invalid OTP Code. Registration aborted.");
-      setIsSubmitting(false);
-      return;
-    }
-    toast.success("✅ Phone verified!");
-    // --- End Mock OTP Logic ---
-
     const age = calculateAge(formData.dob);
     const submissionPayload = {
       fullName: formData.fullName,
