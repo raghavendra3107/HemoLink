@@ -44,8 +44,8 @@ export default function Header({ currentUser }) {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
-          ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100" 
-          : "bg-white/90 backdrop-blur-sm border-b border-gray-100"
+          ? "bg-black/70 backdrop-blur-lg shadow-lg border-b border-white/10" 
+          : "bg-black/30 backdrop-blur-md border-b border-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -55,7 +55,7 @@ export default function Header({ currentUser }) {
             to="/" 
             className="flex items-center gap-3 group"
           >
-            <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-red-600 shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+            <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-red-600 shadow-lg group-hover:shadow-red-500/50 transition-all duration-300 group-hover:scale-105">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -66,10 +66,10 @@ export default function Header({ currentUser }) {
               </svg>
             </div>
             <div className="flex flex-col">
-              <h1 className="text-lg font-bold text-gray-900 group-hover:text-red-600 transition-colors duration-200">
+              <h1 className="text-lg font-bold text-white group-hover:text-red-400 transition-colors duration-200">
                 {WEBSITE_NAME}
               </h1>
-              <p className="text-xs text-gray-500 -mt-0.5 font-medium">
+              <p className="text-xs text-gray-400 -mt-0.5 font-medium">
                 HemoLink
               </p>
             </div>
@@ -83,8 +83,8 @@ export default function Header({ currentUser }) {
                 to={link.path}
                 className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
                   isActiveLink(link.path)
-                    ? "text-red-700 bg-red-50"
-                    : "text-gray-700 hover:text-red-600 hover:bg-gray-50"
+                    ? "text-red-400 bg-red-500/20"
+                    : "text-gray-300 hover:text-white hover:bg-white/10"
                 }`}
               >
                 {link.name}
@@ -93,7 +93,7 @@ export default function Header({ currentUser }) {
             ))}
             
             {/* Separator */}
-            <div className="w-px h-6 bg-gray-300 mx-2"></div>
+            <div className="w-px h-6 bg-white/20 mx-2"></div>
             
             {/* Auth Links */}
             {authLinks.map((link) => (
@@ -102,10 +102,10 @@ export default function Header({ currentUser }) {
                 to={link.path}
                 className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
                   link.name.includes("Register")
-                    ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg hover:shadow-xl hover:from-red-700 hover:to-red-800 hover:scale-105"
+                    ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg hover:shadow-red-500/50 hover:from-red-500 hover:to-red-600 hover:scale-105"
                     : isActiveLink(link.path)
-                    ? "text-red-700 bg-red-50"
-                    : "text-gray-700 hover:text-red-600 hover:bg-gray-50"
+                    ? "text-red-400 bg-red-500/20"
+                    : "text-gray-300 hover:text-white hover:bg-white/10"
                 }`}
               >
                 {link.name}
@@ -118,8 +118,8 @@ export default function Header({ currentUser }) {
             onClick={() => setMobileOpen(!mobileOpen)}
             className={`md:hidden p-2 rounded-xl transition-all duration-200 ${
               mobileOpen 
-                ? "bg-red-50 text-red-600" 
-                : "hover:bg-gray-100 text-gray-600"
+                ? "bg-red-500/20 text-red-400" 
+                : "hover:bg-white/10 text-gray-300"
             }`}
             aria-label="Toggle menu"
           >
@@ -141,7 +141,7 @@ export default function Header({ currentUser }) {
         <div className={`md:hidden overflow-hidden transition-all duration-300 ${
           mobileOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}>
-          <div className="border-t border-gray-200 pt-4 pb-6 px-3 bg-white/95 backdrop-blur-sm rounded-b-2xl shadow-lg">
+          <div className="border-t border-white/10 pt-4 pb-6 px-3 bg-black/90 backdrop-blur-xl rounded-b-2xl shadow-2xl">
             {/* Main Navigation Links */}
             <div className="space-y-1 mb-4">
               {navLinks.map((link) => (
@@ -150,8 +150,8 @@ export default function Header({ currentUser }) {
                   to={link.path}
                   className={`block px-4 py-3 rounded-xl text-base font-medium transition-all duration-200 ${
                     isActiveLink(link.path)
-                      ? "bg-red-50 text-red-700 border-l-4 border-red-500"
-                      : "text-gray-700 hover:bg-gray-50 hover:text-red-600"
+                      ? "bg-red-500/20 text-red-400 border-l-4 border-red-500"
+                      : "text-gray-300 hover:bg-white/10 hover:text-white"
                   }`}
                   onClick={() => setMobileOpen(false)}
                 >
@@ -161,17 +161,17 @@ export default function Header({ currentUser }) {
             </div>
             
             {/* Auth Links */}
-            <div className="space-y-2 border-t border-gray-200 pt-4">
+            <div className="space-y-2 border-t border-white/10 pt-4">
               {authLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
                   className={`block px-4 py-3 rounded-xl text-base font-medium transition-all duration-200 ${
                     link.name.includes("Register")
-                      ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg text-center hover:shadow-xl"
+                      ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg text-center hover:shadow-red-500/50"
                       : isActiveLink(link.path)
-                      ? "bg-red-50 text-red-700 border-l-4 border-red-500"
-                      : "text-gray-700 hover:bg-gray-50 hover:text-red-600 text-center"
+                      ? "bg-red-500/20 text-red-400 border-l-4 border-red-500"
+                      : "text-gray-300 hover:bg-white/10 hover:text-white text-center"
                   }`}
                   onClick={() => setMobileOpen(false)}
                 >
