@@ -320,7 +320,7 @@ export default function DonorRegisterForm() {
         <div className="absolute inset-0 bg-white/40"></div>
       </div>
       
-      <div className="relative z-10 w-full max-w-3xl bg-white rounded-xl shadow-2xl overflow-hidden border border-red-100">
+      <div className="relative z-10 w-full max-w-3xl bg-black/60 backdrop-blur-xl rounded-xl shadow-2xl overflow-hidden border border-white/20">
         {/* Header Section */}
         <div className="bg-red-700 text-white p-6">
           <h1 className="text-2xl font-bold text-center mb-2">
@@ -349,12 +349,12 @@ export default function DonorRegisterForm() {
         </div>
 
         {/* Form Section */}
-        <form onSubmit={handleSubmit} className="p-6 md:p-8 space-y-6">
+        <form onSubmit={handleSubmit} className="p-6 md:p-8 space-y-6 text-white">
           {/* Step 1: Personal Information */}
           {step === 1 && (
             <div className="space-y-6">
               <div>
-                <label htmlFor="fullName" className="block font-medium mb-2">
+                <label htmlFor="fullName" className="block font-medium text-gray-200 mb-2">
                   Full Name <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -364,20 +364,20 @@ export default function DonorRegisterForm() {
                   value={formData.fullName}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                    shouldShowError("fullName") ? "border-red-500" : "border-gray-300"
+                  className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                    shouldShowError("fullName") ? "border-red-500" : "border-white/20"
                   }`}
                   placeholder="Enter your full name"
                 />
                 {shouldShowError("fullName") && (
                   <p className="text-red-500 text-sm mt-1 flex items-center">
-                    <span className="mr-1">⚠</span> {errors.fullName}
+                    <span className="mr-1 text-red-400">⚠</span> {errors.fullName}
                   </p>
                 )}
               </div>
               
               <div>
-                <label htmlFor="email" className="block font-medium mb-2">
+                <label htmlFor="email" className="block font-medium text-gray-200 mb-2">
                   Email <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -387,20 +387,20 @@ export default function DonorRegisterForm() {
                   value={formData.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                    shouldShowError("email") ? "border-red-500" : "border-gray-300"
+                  className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                    shouldShowError("email") ? "border-red-500" : "border-white/20"
                   }`}
                   placeholder="Enter email address"
                 />
                 {shouldShowError("email") && (
                   <p className="text-red-500 text-sm mt-1 flex items-center">
-                    <span className="mr-1">⚠</span> {errors.email}
+                    <span className="mr-1 text-red-400">⚠</span> {errors.email}
                   </p>
                 )}
               </div>
 
               <div>
-                <label htmlFor="password" className="block font-medium mb-2">
+                <label htmlFor="password" className="block font-medium text-gray-200 mb-2">
                   Password <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
@@ -411,8 +411,8 @@ export default function DonorRegisterForm() {
                     value={formData.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                      shouldShowError("password") ? "border-red-500" : "border-gray-300"
+                    className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                      shouldShowError("password") ? "border-red-500" : "border-white/20"
                     }`}
                     placeholder="Enter password (min 8 characters)"
                   />
@@ -427,14 +427,14 @@ export default function DonorRegisterForm() {
                 </div>
                 {shouldShowError("password") && (
                   <p className="text-red-500 text-sm mt-1 flex items-center">
-                    <span className="mr-1">⚠</span> {errors.password}
+                    <span className="mr-1 text-red-400">⚠</span> {errors.password}
                   </p>
                 )}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="phone" className="block font-medium mb-2">
+                  <label htmlFor="phone" className="block font-medium text-gray-200 mb-2">
                     Phone Number <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -444,21 +444,21 @@ export default function DonorRegisterForm() {
                     value={formData.phone}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                      shouldShowError("phone") ? "border-red-500" : "border-gray-300"
+                    className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                      shouldShowError("phone") ? "border-red-500" : "border-white/20"
                     }`}
                     placeholder="10-digit phone number"
                     maxLength="10"
                   />
                   {shouldShowError("phone") && (
                     <p className="text-red-500 text-sm mt-1 flex items-center">
-                      <span className="mr-1">⚠</span> {errors.phone}
+                      <span className="mr-1 text-red-400">⚠</span> {errors.phone}
                     </p>
                   )}
                 </div>
                 
                 <div>
-                  <label htmlFor="emergencyContact" className="block font-medium mb-2">
+                  <label htmlFor="emergencyContact" className="block font-medium text-gray-200 mb-2">
                     Emergency Contact <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -468,15 +468,15 @@ export default function DonorRegisterForm() {
                     value={formData.emergencyContact}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                      shouldShowError("emergencyContact") ? "border-red-500" : "border-gray-300"
+                    className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                      shouldShowError("emergencyContact") ? "border-red-500" : "border-white/20"
                     }`}
                     placeholder="10-digit emergency contact"
                     maxLength="10"
                   />
                   {shouldShowError("emergencyContact") && (
                     <p className="text-red-500 text-sm mt-1 flex items-center">
-                      <span className="mr-1">⚠</span> {errors.emergencyContact}
+                      <span className="mr-1 text-red-400">⚠</span> {errors.emergencyContact}
                     </p>
                   )}
                 </div>
@@ -489,7 +489,7 @@ export default function DonorRegisterForm() {
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="dob" className="block font-medium mb-2">
+                  <label htmlFor="dob" className="block font-medium text-gray-200 mb-2">
                     Date of Birth <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -499,24 +499,24 @@ export default function DonorRegisterForm() {
                     value={formData.dob}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                      shouldShowError("dob") ? "border-red-500" : "border-gray-300"
+                    className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                      shouldShowError("dob") ? "border-red-500" : "border-white/20"
                     }`}
                   />
                   {shouldShowError("dob") && (
                     <p className="text-red-500 text-sm mt-1 flex items-center">
-                      <span className="mr-1">⚠</span> {errors.dob}
+                      <span className="mr-1 text-red-400">⚠</span> {errors.dob}
                     </p>
                   )}
                   {formData.dob && (
-                    <p className="text-sm text-gray-600 mt-1">
+                    <p className="text-sm text-gray-300 mt-1">
                       Age: {calculateAge(formData.dob)} years
                     </p>
                   )}
                 </div>
                 
                 <div>
-                  <label htmlFor="gender" className="block font-medium mb-2">
+                  <label htmlFor="gender" className="block font-medium text-gray-200 mb-2">
                     Gender <span className="text-red-500">*</span>
                   </label>
                   <select
@@ -525,25 +525,25 @@ export default function DonorRegisterForm() {
                     value={formData.gender}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                      shouldShowError("gender") ? "border-red-500" : "border-gray-300"
+                    className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                      shouldShowError("gender") ? "border-red-500" : "border-white/20"
                     }`}
                   >
-                    <option value="">Select Gender</option>
+                    <option className="bg-gray-900 text-white" value="">Select Gender</option>
                     {GENDERS.map(gender => (
-                      <option key={gender} value={gender}>{gender}</option>
+                      <option className="bg-gray-900 text-white" key={gender} value={gender}>{gender}</option>
                     ))}
                   </select>
                   {shouldShowError("gender") && (
                     <p className="text-red-500 text-sm mt-1 flex items-center">
-                      <span className="mr-1">⚠</span> {errors.gender}
+                      <span className="mr-1 text-red-400">⚠</span> {errors.gender}
                     </p>
                   )}
                 </div>
               </div>
 
               <div>
-                <label htmlFor="bloodGroup" className="block font-medium mb-2">
+                <label htmlFor="bloodGroup" className="block font-medium text-gray-200 mb-2">
                   Blood Group <span className="text-red-500">*</span>
                 </label>
                 <select
@@ -552,25 +552,25 @@ export default function DonorRegisterForm() {
                   value={formData.bloodGroup}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                    shouldShowError("bloodGroup") ? "border-red-500" : "border-gray-300"
+                  className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                    shouldShowError("bloodGroup") ? "border-red-500" : "border-white/20"
                   }`}
                 >
-                  <option value="">Select Blood Group</option>
+                  <option className="bg-gray-900 text-white" value="">Select Blood Group</option>
                   {BLOOD_GROUPS.map(group => (
-                    <option key={group} value={group}>{group}</option>
+                    <option className="bg-gray-900 text-white" key={group} value={group}>{group}</option>
                   ))}
                 </select>
                 {shouldShowError("bloodGroup") && (
                   <p className="text-red-500 text-sm mt-1 flex items-center">
-                    <span className="mr-1">⚠</span> {errors.bloodGroup}
+                    <span className="mr-1 text-red-400">⚠</span> {errors.bloodGroup}
                   </p>
                 )}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="weight" className="block font-medium mb-2">
+                  <label htmlFor="weight" className="block font-medium text-gray-200 mb-2">
                     Weight (kg) <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -580,8 +580,8 @@ export default function DonorRegisterForm() {
                     value={formData.healthInfo.weight}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                      shouldShowError("healthInfo.weight") ? "border-red-500" : "border-gray-300"
+                    className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                      shouldShowError("healthInfo.weight") ? "border-red-500" : "border-white/20"
                     }`}
                     placeholder="Minimum 45kg"
                     min="45"
@@ -589,13 +589,13 @@ export default function DonorRegisterForm() {
                   />
                   {shouldShowError("healthInfo.weight") && (
                     <p className="text-red-500 text-sm mt-1 flex items-center">
-                      <span className="mr-1">⚠</span> {errors["healthInfo.weight"]}
+                      <span className="mr-1 text-red-400">⚠</span> {errors["healthInfo.weight"]}
                     </p>
                   )}
                 </div>
                 
                 <div>
-                  <label htmlFor="height" className="block font-medium mb-2">
+                  <label htmlFor="height" className="block font-medium text-gray-200 mb-2">
                     Height (cm) <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -605,8 +605,8 @@ export default function DonorRegisterForm() {
                     value={formData.healthInfo.height}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                      shouldShowError("healthInfo.height") ? "border-red-500" : "border-gray-300"
+                    className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                      shouldShowError("healthInfo.height") ? "border-red-500" : "border-white/20"
                     }`}
                     placeholder="Height in cm"
                     min="100"
@@ -614,7 +614,7 @@ export default function DonorRegisterForm() {
                   />
                   {shouldShowError("healthInfo.height") && (
                     <p className="text-red-500 text-sm mt-1 flex items-center">
-                      <span className="mr-1">⚠</span> {errors["healthInfo.height"]}
+                      <span className="mr-1 text-red-400">⚠</span> {errors["healthInfo.height"]}
                     </p>
                   )}
                 </div>
@@ -629,14 +629,14 @@ export default function DonorRegisterForm() {
                   onChange={handleChange}
                   className="w-4 h-4 accent-red-500"
                 />
-                <label htmlFor="hasDiseases" className="font-medium">
+                <label htmlFor="hasDiseases" className="font-medium text-gray-200">
                   I have existing medical conditions
                 </label>
               </div>
 
               {formData.healthInfo.hasDiseases && (
                 <div>
-                  <label htmlFor="diseaseDetails" className="block font-medium mb-2">
+                  <label htmlFor="diseaseDetails" className="block font-medium text-gray-200 mb-2">
                     Medical Conditions Details
                   </label>
                   <textarea
@@ -645,7 +645,7 @@ export default function DonorRegisterForm() {
                     value={formData.healthInfo.diseaseDetails}
                     onChange={handleChange}
                     rows="3"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+                    className="w-full px-4 py-3 bg-black/30 text-white border border-white/20 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
                     placeholder="Please describe any medical conditions, allergies, or medications..."
                   />
                 </div>
@@ -657,7 +657,7 @@ export default function DonorRegisterForm() {
           {step === 3 && (
             <div className="space-y-6">
               <div>
-                <label htmlFor="street" className="block font-medium mb-2">
+                <label htmlFor="street" className="block font-medium text-gray-200 mb-2">
                   Street Address <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -667,21 +667,21 @@ export default function DonorRegisterForm() {
                   value={formData.address.street}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                    shouldShowError("address.street") ? "border-red-500" : "border-gray-300"
+                  className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                    shouldShowError("address.street") ? "border-red-500" : "border-white/20"
                   }`}
                   placeholder="Enter street address"
                 />
                 {shouldShowError("address.street") && (
                   <p className="text-red-500 text-sm mt-1 flex items-center">
-                    <span className="mr-1">⚠</span> {errors["address.street"]}
+                    <span className="mr-1 text-red-400">⚠</span> {errors["address.street"]}
                   </p>
                 )}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div>
-                  <label htmlFor="state" className="block font-medium mb-2">
+                  <label htmlFor="state" className="block font-medium text-gray-200 mb-2">
                     State <span className="text-red-500">*</span>
                   </label>
                   <select
@@ -696,24 +696,24 @@ export default function DonorRegisterForm() {
                       }));
                     }}
                     onBlur={handleBlur}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                      shouldShowError("address.state") ? "border-red-500" : "border-gray-300"
+                    className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                      shouldShowError("address.state") ? "border-red-500" : "border-white/20"
                     }`}
                   >
-                    <option value="">Select State</option>
+                    <option className="bg-gray-900 text-white" value="">Select State</option>
                     {indianStates.map(state => (
-                      <option key={state.isoCode} value={state.name}>{state.name}</option>
+                      <option className="bg-gray-900 text-white" key={state.isoCode} value={state.name}>{state.name}</option>
                     ))}
                   </select>
                   {shouldShowError("address.state") && (
                     <p className="text-red-500 text-sm mt-1 flex items-center">
-                      <span className="mr-1">⚠</span> {errors["address.state"]}
+                      <span className="mr-1 text-red-400">⚠</span> {errors["address.state"]}
                     </p>
                   )}
                 </div>
 
                 <div>
-                  <label htmlFor="city" className="block font-medium mb-2">
+                  <label htmlFor="city" className="block font-medium text-gray-200 mb-2">
                     City <span className="text-red-500">*</span>
                   </label>
                   <select
@@ -722,26 +722,26 @@ export default function DonorRegisterForm() {
                     value={formData.address.city}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                      shouldShowError("address.city") ? "border-red-500" : "border-gray-300"
+                    className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                      shouldShowError("address.city") ? "border-red-500" : "border-white/20"
                     }`}
                     disabled={!formData.address.state}
                   >
-                    <option value="">Select City</option>
+                    <option className="bg-gray-900 text-white" value="">Select City</option>
                     {formData.address.state &&
                       City.getCitiesOfState("IN", indianStates.find(s => s.name === formData.address.state)?.isoCode || "").map(city => (
-                        <option key={city.name} value={city.name}>{city.name}</option>
+                        <option className="bg-gray-900 text-white" key={city.name} value={city.name}>{city.name}</option>
                       ))}
                   </select>
                   {shouldShowError("address.city") && (
                     <p className="text-red-500 text-sm mt-1 flex items-center">
-                      <span className="mr-1">⚠</span> {errors["address.city"]}
+                      <span className="mr-1 text-red-400">⚠</span> {errors["address.city"]}
                     </p>
                   )}
                 </div>
 
                 <div>
-                  <label htmlFor="pincode" className="block font-medium mb-2">
+                  <label htmlFor="pincode" className="block font-medium text-gray-200 mb-2">
                     Pincode <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -751,15 +751,15 @@ export default function DonorRegisterForm() {
                     value={formData.address.pincode}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                      shouldShowError("address.pincode") ? "border-red-500" : "border-gray-300"
+                    className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                      shouldShowError("address.pincode") ? "border-red-500" : "border-white/20"
                     }`}
                     placeholder="6-digit pincode"
                     maxLength="6"
                   />
                   {shouldShowError("address.pincode") && (
                     <p className="text-red-500 text-sm mt-1 flex items-center">
-                      <span className="mr-1">⚠</span> {errors["address.pincode"]}
+                      <span className="mr-1 text-red-400">⚠</span> {errors["address.pincode"]}
                     </p>
                   )}
                 </div>
@@ -768,12 +768,12 @@ export default function DonorRegisterForm() {
           )}
 
           {/* Navigation Buttons */}
-          <div className={`flex ${step > 1 ? 'justify-between' : 'justify-end'} pt-6 border-t`}>
+          <div className={`flex ${step > 1 ? 'justify-between' : 'justify-end'} pt-6 border-t border-white/10`}>
             {step > 1 && (
               <button
                 type="button"
                 onClick={handleBack}
-                className="px-6 py-2.5 bg-gray-200 text-gray-900 rounded-lg hover:bg-gray-300 transition font-medium"
+                className="px-6 py-2.5 bg-white/10 text-white border border-white/10 rounded-lg hover:bg-white/20 transition font-medium"
                 disabled={isSubmitting}
               >
                 Back

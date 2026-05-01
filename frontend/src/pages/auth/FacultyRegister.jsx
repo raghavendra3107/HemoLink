@@ -345,7 +345,7 @@ export default function FacilityRegisterForm() {
         <div className="absolute inset-0 bg-white/40"></div>
       </div>
       
-      <div className="relative z-10 w-full max-w-3xl bg-white rounded-xl shadow-2xl overflow-hidden border border-red-100">
+      <div className="relative z-10 w-full max-w-3xl bg-black/60 backdrop-blur-xl rounded-xl shadow-2xl overflow-hidden border border-white/20">
         {/* Header Section */}
         <div className="bg-red-700 text-white p-6">
           <h1 className="text-2xl font-bold text-center mb-2">
@@ -374,12 +374,12 @@ export default function FacilityRegisterForm() {
         </div>
 
         {/* Form Section */}
-        <form onSubmit={handleSubmit} className="p-6 md:p-8 space-y-6">
+        <form onSubmit={handleSubmit} className="p-6 md:p-8 space-y-6 text-white">
           {/* Step 1: Basic Information */}
           {step === 1 && (
             <div className="space-y-6">
               <div>
-                <label htmlFor="name" className="block font-medium mb-2">
+                <label htmlFor="name" className="block font-medium text-gray-200 mb-2">
                   Facility Name <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -389,20 +389,20 @@ export default function FacilityRegisterForm() {
                   value={formData.name}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                    shouldShowError("name") ? "border-red-500" : "border-gray-300"
+                  className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                    shouldShowError("name") ? "border-red-500" : "border-white/20"
                   }`}
                   placeholder="Enter facility name"
                 />
                 {shouldShowError("name") && (
                   <p className="text-red-500 text-sm mt-1 flex items-center">
-                    <span className="mr-1">⚠</span> {errors.name}
+                    <span className="mr-1 text-red-400">⚠</span> {errors.name}
                   </p>
                 )}
               </div>
               
               <div>
-                <label htmlFor="email" className="block font-medium mb-2">
+                <label htmlFor="email" className="block font-medium text-gray-200 mb-2">
                   Email <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -412,14 +412,14 @@ export default function FacilityRegisterForm() {
                   value={formData.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                    shouldShowError("email") ? "border-red-500" : "border-gray-300"
+                  className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                    shouldShowError("email") ? "border-red-500" : "border-white/20"
                   }`}
                   placeholder="Enter email address"
                 />
                 {shouldShowError("email") && (
                   <p className="text-red-500 text-sm mt-1 flex items-center">
-                    <span className="mr-1">⚠</span> {errors.email}
+                    <span className="mr-1 text-red-400">⚠</span> {errors.email}
                   </p>
                 )}
               </div>
@@ -430,7 +430,7 @@ export default function FacilityRegisterForm() {
           {step === 2 && (
             <div className="space-y-6">
               <div>
-                <label htmlFor="password" className="block font-medium mb-2">
+                <label htmlFor="password" className="block font-medium text-gray-200 mb-2">
                   Password <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
@@ -441,8 +441,8 @@ export default function FacilityRegisterForm() {
                     value={formData.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                      shouldShowError("password") ? "border-red-500" : "border-gray-300"
+                    className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                      shouldShowError("password") ? "border-red-500" : "border-white/20"
                     }`}
                     placeholder="Enter password (min 6 characters)"
                   />
@@ -457,14 +457,14 @@ export default function FacilityRegisterForm() {
                 </div>
                 {shouldShowError("password") && (
                   <p className="text-red-500 text-sm mt-1 flex items-center">
-                    <span className="mr-1">⚠</span> {errors.password}
+                    <span className="mr-1 text-red-400">⚠</span> {errors.password}
                   </p>
                 )}
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="facilityType" className="block font-medium mb-2">
+                  <label htmlFor="facilityType" className="block font-medium text-gray-200 mb-2">
                     Facility Type <span className="text-red-500">*</span>
                   </label>
                   <select
@@ -473,16 +473,16 @@ export default function FacilityRegisterForm() {
                     value={formData.facilityType}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+                    className="w-full px-4 py-3 bg-black/30 text-white border border-white/20 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
                   >
                     {FACILITY_TYPES.map(ft => (
-                      <option key={ft} value={ft}>{ft}</option>
+                      <option className="bg-gray-900 text-white" key={ft} value={ft}>{ft}</option>
                     ))}
                   </select>
                 </div>
                 
                 <div>
-                  <label htmlFor="facilityCategory" className="block font-medium mb-2">
+                  <label htmlFor="facilityCategory" className="block font-medium text-gray-200 mb-2">
                     Facility Category
                   </label>
                   <select
@@ -490,10 +490,10 @@ export default function FacilityRegisterForm() {
                     name="facilityCategory"
                     value={formData.facilityCategory}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+                    className="w-full px-4 py-3 bg-black/30 text-white border border-white/20 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
                   >
                     {FACILITY_CATEGORIES.map(fc => (
-                      <option key={fc} value={fc}>{fc}</option>
+                      <option className="bg-gray-900 text-white" key={fc} value={fc}>{fc}</option>
                     ))}
                   </select>
                 </div>
@@ -506,7 +506,7 @@ export default function FacilityRegisterForm() {
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="phone" className="block font-medium mb-2">
+                  <label htmlFor="phone" className="block font-medium text-gray-200 mb-2">
                     Phone <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -516,21 +516,21 @@ export default function FacilityRegisterForm() {
                     value={formData.phone}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                      shouldShowError("phone") ? "border-red-500" : "border-gray-300"
+                    className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                      shouldShowError("phone") ? "border-red-500" : "border-white/20"
                     }`}
                     placeholder="10-digit phone number"
                     maxLength="10"
                   />
                   {shouldShowError("phone") && (
                     <p className="text-red-500 text-sm mt-1 flex items-center">
-                      <span className="mr-1">⚠</span> {errors.phone}
+                      <span className="mr-1 text-red-400">⚠</span> {errors.phone}
                     </p>
                   )}
                 </div>
                 
                 <div>
-                  <label htmlFor="emergencyContact" className="block font-medium mb-2">
+                  <label htmlFor="emergencyContact" className="block font-medium text-gray-200 mb-2">
                     Emergency Contact <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -540,15 +540,15 @@ export default function FacilityRegisterForm() {
                     value={formData.emergencyContact}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                      shouldShowError("emergencyContact") ? "border-red-500" : "border-gray-300"
+                    className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                      shouldShowError("emergencyContact") ? "border-red-500" : "border-white/20"
                     }`}
                     placeholder="10-digit emergency contact"
                     maxLength="10"
                   />
                   {shouldShowError("emergencyContact") && (
                     <p className="text-red-500 text-sm mt-1 flex items-center">
-                      <span className="mr-1">⚠</span> {errors.emergencyContact}
+                      <span className="mr-1 text-red-400">⚠</span> {errors.emergencyContact}
                     </p>
                   )}
                 </div>
@@ -556,7 +556,7 @@ export default function FacilityRegisterForm() {
 
               {/* Address Section */}
               <div className="space-y-4">
-                <label className="block font-medium mb-2">Address <span className="text-red-500">*</span></label>
+                <label className="block font-medium text-gray-200 mb-2">Address <span className="text-red-500">*</span></label>
                 
                 <input
                   type="text"
@@ -565,13 +565,13 @@ export default function FacilityRegisterForm() {
                   value={formData.address.street}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                    shouldShowError("address.street") ? "border-red-500" : "border-gray-300"
+                  className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                    shouldShowError("address.street") ? "border-red-500" : "border-white/20"
                   }`}
                 />
                 {shouldShowError("address.street") && (
                   <p className="text-red-500 text-sm mt-1 flex items-center">
-                    <span className="mr-1">⚠</span> {errors["address.street"]}
+                    <span className="mr-1 text-red-400">⚠</span> {errors["address.street"]}
                   </p>
                 )}
 
@@ -588,18 +588,18 @@ export default function FacilityRegisterForm() {
                         }));
                       }}
                       onBlur={handleBlur}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                        shouldShowError("address.state") ? "border-red-500" : "border-gray-300"
+                      className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                        shouldShowError("address.state") ? "border-red-500" : "border-white/20"
                       }`}
                     >
-                      <option value="">Select State</option>
+                      <option className="bg-gray-900 text-white" value="">Select State</option>
                       {indianStates.map(state => (
-                        <option key={state.isoCode} value={state.name}>{state.name}</option>
+                        <option className="bg-gray-900 text-white" key={state.isoCode} value={state.name}>{state.name}</option>
                       ))}
                     </select>
                     {shouldShowError("address.state") && (
                       <p className="text-red-500 text-sm mt-1 flex items-center">
-                        <span className="mr-1">⚠</span> {errors["address.state"]}
+                        <span className="mr-1 text-red-400">⚠</span> {errors["address.state"]}
                       </p>
                     )}
                   </div>
@@ -610,20 +610,20 @@ export default function FacilityRegisterForm() {
                       value={formData.address.city}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                        shouldShowError("address.city") ? "border-red-500" : "border-gray-300"
+                      className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                        shouldShowError("address.city") ? "border-red-500" : "border-white/20"
                       }`}
                       disabled={!formData.address.state}
                     >
-                      <option value="">Select City</option>
+                      <option className="bg-gray-900 text-white" value="">Select City</option>
                       {formData.address.state &&
                         City.getCitiesOfState("IN", indianStates.find(s => s.name === formData.address.state)?.isoCode || "").map(city => (
-                          <option key={city.name} value={city.name}>{city.name}</option>
+                          <option className="bg-gray-900 text-white" key={city.name} value={city.name}>{city.name}</option>
                         ))}
                     </select>
                     {shouldShowError("address.city") && (
                       <p className="text-red-500 text-sm mt-1 flex items-center">
-                        <span className="mr-1">⚠</span> {errors["address.city"]}
+                        <span className="mr-1 text-red-400">⚠</span> {errors["address.city"]}
                       </p>
                     )}
                   </div>
@@ -636,14 +636,14 @@ export default function FacilityRegisterForm() {
                       value={formData.address.pincode}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                        shouldShowError("address.pincode") ? "border-red-500" : "border-gray-300"
+                      className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                        shouldShowError("address.pincode") ? "border-red-500" : "border-white/20"
                       }`}
                       maxLength="6"
                     />
                     {shouldShowError("address.pincode") && (
                       <p className="text-red-500 text-sm mt-1 flex items-center">
-                        <span className="mr-1">⚠</span> {errors["address.pincode"]}
+                        <span className="mr-1 text-red-400">⚠</span> {errors["address.pincode"]}
                       </p>
                     )}
                   </div>
@@ -651,7 +651,7 @@ export default function FacilityRegisterForm() {
               </div>
 
               <div>
-                <label htmlFor="registrationNumber" className="block font-medium mb-2">
+                <label htmlFor="registrationNumber" className="block font-medium text-gray-200 mb-2">
                   Registration Number <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -661,20 +661,20 @@ export default function FacilityRegisterForm() {
                   value={formData.registrationNumber}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                    shouldShowError("registrationNumber") ? "border-red-500" : "border-gray-300"
+                  className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                    shouldShowError("registrationNumber") ? "border-red-500" : "border-white/20"
                   }`}
                   placeholder="Enter registration number"
                 />
                 {shouldShowError("registrationNumber") && (
                   <p className="text-red-500 text-sm mt-1 flex items-center">
-                    <span className="mr-1">⚠</span> {errors.registrationNumber}
+                    <span className="mr-1 text-red-400">⚠</span> {errors.registrationNumber}
                   </p>
                 )}
               </div>
 
               <div>
-                <label htmlFor="documentUrl" className="block font-medium mb-2">
+                <label htmlFor="documentUrl" className="block font-medium text-gray-200 mb-2">
                   Registration Proof URL <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -684,14 +684,14 @@ export default function FacilityRegisterForm() {
                   value={formData.documents.registrationProof.url}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
-                    shouldShowError("documents.registrationProof.url") ? "border-red-500" : "border-gray-300"
+                  className={`w-full px-4 py-3 bg-black/30 text-white border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition ${
+                    shouldShowError("documents.registrationProof.url") ? "border-red-500" : "border-white/20"
                   }`}
                   placeholder="https://example.com/document.pdf"
                 />
                 {shouldShowError("documents.registrationProof.url") && (
                   <p className="text-red-500 text-sm mt-1 flex items-center">
-                    <span className="mr-1">⚠</span> {errors["documents.registrationProof.url"]}
+                    <span className="mr-1 text-red-400">⚠</span> {errors["documents.registrationProof.url"]}
                   </p>
                 )}
               </div>
@@ -699,7 +699,7 @@ export default function FacilityRegisterForm() {
               {/* Operating Hours */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="openTime" className="block font-medium mb-2">
+                  <label htmlFor="openTime" className="block font-medium text-gray-200 mb-2">
                     Opening Time
                   </label>
                   <input
@@ -708,11 +708,11 @@ export default function FacilityRegisterForm() {
                     name="operatingHours.open"
                     value={formData.operatingHours.open}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+                    className="w-full px-4 py-3 bg-black/30 text-white border border-white/20 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
                   />
                 </div>
                 <div>
-                  <label htmlFor="closeTime" className="block font-medium mb-2">
+                  <label htmlFor="closeTime" className="block font-medium text-gray-200 mb-2">
                     Closing Time
                   </label>
                   <input
@@ -721,13 +721,13 @@ export default function FacilityRegisterForm() {
                     name="operatingHours.close"
                     value={formData.operatingHours.close}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+                    className="w-full px-4 py-3 bg-black/30 text-white border border-white/20 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="workingDays" className="block font-medium mb-2">
+                <label htmlFor="workingDays" className="block font-medium text-gray-200 mb-2">
                   Working Days
                 </label>
                 <select
@@ -736,16 +736,16 @@ export default function FacilityRegisterForm() {
                   multiple
                   value={formData.operatingHours.workingDays}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition h-32"
+                  className="w-full px-4 py-3 bg-black/30 text-white border border-white/20 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition h-32"
                   size={5}
                 >
                   {WORKING_DAYS.map(day => (
-                    <option key={day.value} value={day.value}>
+                    <option className="bg-gray-900 text-white" key={day.value} value={day.value}>
                       {day.label}
                     </option>
                   ))}
                 </select>
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="text-sm text-gray-300 mt-1">
                   Hold Ctrl/Cmd to select multiple days
                 </p>
               </div>
@@ -760,7 +760,7 @@ export default function FacilityRegisterForm() {
                     onChange={handleChange}
                     className="w-4 h-4 accent-red-500"
                   />
-                  <span className="font-medium">24x7 Service</span>
+                  <span className="font-medium text-gray-200">24x7 Service</span>
                 </label>
                 <label className="flex items-center space-x-3 cursor-pointer">
                   <input
@@ -770,19 +770,19 @@ export default function FacilityRegisterForm() {
                     onChange={handleChange}
                     className="w-4 h-4 accent-red-500"
                   />
-                  <span className="font-medium">Emergency Services</span>
+                  <span className="font-medium text-gray-200">Emergency Services</span>
                 </label>
               </div>
             </div>
           )}
 
           {/* Navigation Buttons */}
-          <div className={`flex ${step > 1 ? 'justify-between' : 'justify-end'} pt-6 border-t`}>
+          <div className={`flex ${step > 1 ? 'justify-between' : 'justify-end'} pt-6 border-t border-white/10`}>
             {step > 1 && (
               <button
                 type="button"
                 onClick={handleBack}
-                className="px-6 py-2.5 bg-gray-200 text-gray-900 rounded-lg hover:bg-gray-300 transition font-medium"
+                className="px-6 py-2.5 bg-white/10 text-white border border-white/10 rounded-lg hover:bg-white/20 transition font-medium"
                 disabled={isSubmitting}
               >
                 Back
