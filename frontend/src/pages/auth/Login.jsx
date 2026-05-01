@@ -82,19 +82,19 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-black px-4 relative overflow-hidden">
       <LoginBackground />
       <Header />
-      <div className="bg-white/95 backdrop-blur-md shadow-2xl rounded-2xl p-8 w-full max-w-md border border-red-50 relative z-10">
-        <h2 className="text-2xl font-bold text-center text-gray-900 mb-4">
+      <div className="bg-black/40 backdrop-blur-xl shadow-2xl rounded-2xl p-8 w-full max-w-md border border-white/20 relative z-10">
+        <h2 className="text-2xl font-bold text-center text-white mb-4">
           Login to HemoLink
         </h2>
-        <p className="text-center text-gray-500 mb-6">
+        <p className="text-center text-gray-300 mb-6">
           Access your donor, hospital, or lab dashboard
         </p>
 
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-4 flex items-center">
+          <div className="bg-red-500/20 border border-red-500/50 text-red-200 px-4 py-3 rounded-lg mb-4 flex items-center">
             <span className="mr-2">⚠</span>
             {error}
           </div>
@@ -102,7 +102,7 @@ export default function Login() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-800 mb-1">
+            <label className="block text-sm font-medium text-gray-200 mb-1">
               Email
             </label>
             <input
@@ -113,12 +113,12 @@ export default function Login() {
               onChange={handleChange}
               required
               disabled={loading}
-              className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition disabled:opacity-50"
+              className="w-full px-4 py-3 bg-black/30 border border-white/20 text-white placeholder-gray-400 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition disabled:opacity-50"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-800 mb-1">
+            <label className="block text-sm font-medium text-gray-200 mb-1">
               Password
             </label>
             <input
@@ -129,14 +129,14 @@ export default function Login() {
               onChange={handleChange}
               required
               disabled={loading}
-              className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition disabled:opacity-50"
+              className="w-full px-4 py-3 bg-black/30 border border-white/20 text-white placeholder-gray-400 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition disabled:opacity-50"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+            className="w-full py-3 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center shadow-lg shadow-red-600/30"
           >
             {loading ? (
               <>
@@ -150,17 +150,17 @@ export default function Login() {
         </form>
 
         <div className="mt-6 text-center">
-          <p className="text-gray-600 text-sm font-medium mb-3">Don't have an account? Sign Up Below</p>
+          <p className="text-gray-300 text-sm font-medium mb-3">Don't have an account? Sign Up Below</p>
           <div className="flex flex-col gap-3">
             <Link
               to="/register/donor"
-              className="w-full py-2.5 bg-red-50 text-red-600 border border-red-200 rounded-lg font-semibold hover:bg-red-100 transition"
+              className="w-full py-2.5 bg-red-500/20 text-red-100 border border-red-500/30 rounded-lg font-semibold hover:bg-red-500/40 transition"
             >
               Sign up as Donor
             </Link>
             <Link
               to="/register/facility"
-              className="w-full py-2.5 bg-blue-50 text-blue-600 border border-blue-200 rounded-lg font-semibold hover:bg-blue-100 transition"
+              className="w-full py-2.5 bg-blue-500/20 text-blue-100 border border-blue-500/30 rounded-lg font-semibold hover:bg-blue-500/40 transition"
             >
               Sign up as Facility
             </Link>
