@@ -1,113 +1,76 @@
 # HemoLink
 
+## Live Demo
+
+Frontend: https://hemo-link-five.vercel.app/  
+Backend API: https://hemolink-backend-ed7u.onrender.com
+
 ## Overview
 
-The **HemoLink** is a web-based platform designed to streamline the management of blood donations, hospital requests, and inventory tracking. By replacing manual processes with a structured digital workflow, HemoLink enables hospitals and blood banks to access real-time inventory, maintain donor records, and process blood requests efficiently.
+**HemoLink** is a full-stack web application designed to streamline blood donation management, hospital blood requests, and inventory tracking. It replaces manual workflows with a centralized digital platform, helping hospitals and blood banks manage donors, requests, and stock efficiently.
 
+The platform enables real-time visibility of blood availability, secure user access, and faster request handling through a structured and scalable system.
+
+---
 
 ## The Problem
 
-Many blood banks still rely on manual documentation, scattered information, and slow communication methods. This leads to:
+Many blood banks and hospitals still rely on manual documentation, fragmented records, and delayed communication systems. This often leads to:
 
-* No real-time visibility of blood availability
-* Delays during emergency blood requirements
-* Frequent data entry errors
-* Difficulty managing donors, patients, and hospital requests
-* Lack of a centralized system connecting all operations
+- No real-time visibility of blood availability
+- Delays during emergency blood requests
+- Frequent data entry errors
+- Difficulty managing donors, hospitals, and requests
+- Lack of a centralized operational system
 
-These limitations reduce the efficiency and reliability of blood bank operations.
+These issues reduce efficiency and can delay urgent medical response.
 
+---
 
 ## Our Solution
 
-HemoLink provides an **all-in-one, centralized, and secure system** that handles all operations digitally. Key features include:
+HemoLink provides a centralized and secure digital platform to manage blood bank operations end-to-end. It simplifies donor registration, hospital requests, inventory monitoring, and administrative workflows in one place.
 
-* Donor registration and management
-* Hospital request creation and status tracking
-* Real-time inventory monitoring
-* Secure authentication using JWT
-* Fully structured backend APIs
-* Organized frontend interface for hospitals and staff
+The system is designed to improve response time, reduce manual errors, and make blood management more reliable and efficient.
 
-The goal is to ensure quick response times, reduce manual errors, and improve operational workflow.
+---
+
+## Features
+
+- User Authentication (JWT-based login/signup)
+- Role-based access control
+- Donor registration and management
+- Blood inventory tracking
+- Hospital blood request management
+- Admin dashboard
+- Secure REST APIs
+- Real-time operational workflow
+
+---
 
 ## Tech Stack
 
 ### Frontend
-
-* React.js
-* React Router
-* Axios
-* Tailwind CSS
+- React.js
+- React Router
+- Axios
+- Tailwind CSS
 
 ### Backend
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+- bcrypt (Password Hashing)
 
-* Node.js
-* Express.js
-* MongoDB
-* Mongoose
-* JWT Authentication
-* bcrypt for password hashing
+---
 
-## Environment Setup
-
-### Clone the Repository
-
-```bash
-git clone <repository-url>
-```
-
-### Backend Setup
+## Project Structure
 
 ```bash
-cd backend
-npm install
-```
-
-Create a `.env` file:
-
-```bash
-MONGO_URI=your_mongo_uri
-JWT_SECRET=your_jwt_secret
-PORT=10000
-
-```
-
-### Important: Seed Admin Account (First Time Setup)
-
-Before starting the backend server for the first time, you must create an admin user.
-
-### Open the file: backend/seedAdmin.js
-Update the admin credentials inside the file:
-
-### Run the seed script from the backend folder:
-
-```bash
-node seedAdmin.js
-```
-
-This will create the admin account in the database.
-
-### Start the backend server:
-
-```bash
-npm start
-```
-
-### Frontend Setup
-
-```bash
-cd ../frontend
-npm install
-npm run dev
-```
-
-**Login Page**
-
-**Admin Dashboard**
-
-**Donor Dashboard**
-
-**Manage Requests**
-
-**Inventory Overview**
+HemoLink/
+├── frontend/
+├── backend/
+├── README.md
+└── test_backend.js
